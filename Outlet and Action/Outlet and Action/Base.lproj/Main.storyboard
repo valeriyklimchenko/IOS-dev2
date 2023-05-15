@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Outlet_and_Action" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My secon App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxQ-iw-KF5">
+                                <rect key="frame" x="142" y="121" width="109" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Opened" translatesAutoresizingMaskIntoConstraints="NO" id="5xP-ct-VXa">
+                                <rect key="frame" x="20" y="189" width="353" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="myI-m1-3xI"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UpB-l3-NlG">
+                                <rect key="frame" x="151.33333333333334" y="421" width="90.666666666666657" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Закрыть">
+                                    <color key="baseForegroundColor" red="1" green="0.32035976259999999" blue="0.52095153510000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="buttonTuched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G4W-gN-Mci"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" name="MainBackground"/>
+                        <constraints>
+                            <constraint firstItem="5xP-ct-VXa" firstAttribute="top" secondItem="uxQ-iw-KF5" secondAttribute="bottom" constant="47" id="6RY-oS-RQm"/>
+                            <constraint firstItem="uxQ-iw-KF5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="A62-BP-lgp"/>
+                            <constraint firstItem="UpB-l3-NlG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="OCE-hE-fuj"/>
+                            <constraint firstItem="UpB-l3-NlG" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="P7J-uw-IaZ"/>
+                            <constraint firstItem="5xP-ct-VXa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="UIA-ZS-fJt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5xP-ct-VXa" secondAttribute="trailing" constant="20" id="uS6-29-sga"/>
+                            <constraint firstItem="uxQ-iw-KF5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="62" id="ylE-sG-eUb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="UpB-l3-NlG" id="d7t-Aj-5uA"/>
+                        <outlet property="imageView" destination="5xP-ct-VXa" id="lZz-jE-mlo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5" y="-27"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Opened" width="225" height="225"/>
+        <namedColor name="MainBackground">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+    </resources>
+</document>

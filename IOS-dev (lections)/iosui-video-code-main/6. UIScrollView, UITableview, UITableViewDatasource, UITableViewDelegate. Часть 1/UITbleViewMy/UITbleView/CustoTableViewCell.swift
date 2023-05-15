@@ -1,0 +1,103 @@
+//
+//  CustoTableViewCell.swift
+//  UITbleView
+//
+//  Created by Валерий Климченко on 12.05.2023.
+//
+
+import UIKit
+
+final class CustoTableViewCell: UITableViewCell {
+    
+    private lazy var whiteView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray4
+        return view
+    }()
+    
+    private lazy var headerCell: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private lazy var descriptionCell: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private lazy var imageCell: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleToFill
+        return image
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        layout()
+        customize()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageCell.image = nil
+        headerCell.text = nil
+        descriptionCell.text = nil
+    }
+    
+    func setupSell(model: CarModel) {
+        imageCell.image = model.image
+        headerCell.text = model.name
+        descriptionCell.text = model.description
+    }
+    
+    private func layout() {
+    
+        contentView.addSubview(whiteView)
+        contentView.addSubview(imageCell)
+        contentView.addSubview(headerCell)
+        contentView.addSubview(descriptionCell)
+        
+//        let safeArea = contentView.safeAreaLayoutGuide
+        let viewInset: CGFloat = 10
+        let imageInset: CGFloat = 8
+        let labelInset: CGFloat = 16
+        let heightView: CGFloat = 100
+        NSLayoutConstraint.activate([
+            
+            whiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: viewInset),
+            whiteView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: viewInset),
+            whiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -viewInset),
+            whiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -viewInset),
+            
+            imageCell.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: imageInset),
+            imageCell.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: imageInset),
+            imageCell.widthAnchor.constraint(equalToConstant: heightView - imageInset * 2),
+            imageCell.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant: -imageInset),
+            
+            headerCell.leadingAnchor.constraint(equalTo: imageCell.trailingAnchor, constant: labelInset),
+            headerCell.topAnchor.constraint(equalTo: imageCell.topAnchor),
+            headerCell.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: labelInset),
+            
+            descriptionCell.leadingAnchor.constraint(equalTo: imageCell.trailingAnchor, constant: labelInset),
+            descriptionCell.topAnchor.constraint(equalTo: headerCell.bottomAnchor, constant: labelInset),
+            descriptionCell.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: labelInset)
+        ])
+    }
+    
+    private func customize() {
+        whiteView.layer.cornerRadius = 10
+        whiteView.layer.borderColor = UIColor.black.cgColor
+        whiteView.layer.borderWidth = 3
+    }
+    
+}
