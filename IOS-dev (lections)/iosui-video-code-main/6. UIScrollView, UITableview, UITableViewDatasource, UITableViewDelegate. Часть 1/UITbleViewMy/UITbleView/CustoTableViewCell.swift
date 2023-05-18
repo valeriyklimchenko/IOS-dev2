@@ -26,7 +26,7 @@ final class CustoTableViewCell: UITableViewCell {
     private lazy var descriptionCell: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        
+        label.numberOfLines = 0
         return label
     }()
     
@@ -54,7 +54,7 @@ final class CustoTableViewCell: UITableViewCell {
         descriptionCell.text = nil
     }
     
-    func setupSell(model: CarModel) {
+    func setupCell(model: CarModel) {
         imageCell.image = model.image
         headerCell.text = model.name
         descriptionCell.text = model.description
@@ -62,13 +62,9 @@ final class CustoTableViewCell: UITableViewCell {
     
     private func layout() {
     
-        contentView.addSubview(whiteView)
-        contentView.addSubview(imageCell)
-        contentView.addSubview(headerCell)
-        contentView.addSubview(descriptionCell)
+        [whiteView, imageCell, headerCell, descriptionCell].forEach { contentView.addSubview($0) }
         
-//        let safeArea = contentView.safeAreaLayoutGuide
-        let viewInset: CGFloat = 10
+        let viewInset: CGFloat = 16
         let imageInset: CGFloat = 8
         let labelInset: CGFloat = 16
         let heightView: CGFloat = 100
@@ -81,7 +77,7 @@ final class CustoTableViewCell: UITableViewCell {
             
             imageCell.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: imageInset),
             imageCell.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: imageInset),
-            imageCell.widthAnchor.constraint(equalToConstant: heightView - imageInset * 2),
+            imageCell.widthAnchor.constraint(equalToConstant: heightView * 1.4),
             imageCell.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant: -imageInset),
             
             headerCell.leadingAnchor.constraint(equalTo: imageCell.trailingAnchor, constant: labelInset),
@@ -90,7 +86,8 @@ final class CustoTableViewCell: UITableViewCell {
             
             descriptionCell.leadingAnchor.constraint(equalTo: imageCell.trailingAnchor, constant: labelInset),
             descriptionCell.topAnchor.constraint(equalTo: headerCell.bottomAnchor, constant: labelInset),
-            descriptionCell.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: labelInset)
+            descriptionCell.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -labelInset),
+            descriptionCell.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant: -viewInset)
         ])
     }
     

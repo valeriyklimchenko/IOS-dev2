@@ -10,7 +10,7 @@ import UIKit
 struct CarModel {
     let name: String
     let image: UIImage
-    let description: String?
+    var description: String?
     
     
     static func makeMockModel() -> [[CarModel]] {
@@ -21,7 +21,7 @@ struct CarModel {
                                 description: ""))
         section.append(CarModel(name: "bmw",
                                 image: UIImage(named: "bmw")!,
-                                description: "Description"))
+                                description: "Официальный сайт Mercedes-Benz в России - вся информация для настоящих и будущих владельцев автомобилей. Онлайн сервисы покупки, запись на техобслуживание, тест-драйв, кредитный и страховой калькулятор, аренда и многое другое"))
         section.append(CarModel(name: "vv",
                                 image: UIImage(named: "vv")!,
                                 description: ""))

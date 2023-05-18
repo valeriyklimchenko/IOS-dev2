@@ -9,14 +9,18 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    let carModel = CarModel.makeMockModel()
+    private var carModel = CarModel.makeMockModel()
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CustoTableViewCell.self, forCellReuseIdentifier: CustoTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
+//        Значение по умолчанию для высоты ячеек
+//        tableView.rowHeight = UITableView.automaticDimension
+        
+//        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -69,14 +73,68 @@ extension ViewController: UITableViewDataSource {
 //        let section = carModel[indexPath.section]
 //        let cel = section[indexPath.row]
 //        cell.setupSell(model: cel)
-        cell.setupSell(model: carModel[indexPath.section][indexPath.row])
+        cell.setupCell(model: carModel[indexPath.section][indexPath.row])
         return cell
     }
 }
 
 extension ViewController: UITableViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //Как меняется bounds при скролле
 //        print("table.frame = \(tableView.frame)")
 //        print("table.bounds = \(tableView.bounds)")
     }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let custumHeader = CustumHeaderView()
+        custumHeader.setupHeaderText("Это хедер секции \(section)")
+        return custumHeader
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = CustumHeaderView()
+        footer.setupHeaderText("Это футер секции \(section)")
+        return footer
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            carModel[indexPath.section].remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+        
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        section % 2 == 0 ? 50 :100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+        let detailView = DetailViewController()
+        detailView.setupDetailVC(model: carModel[indexPath.section][indexPath.row], indexPath: indexPath)
+//        present(detailView, animated: true)
+        navigationController?.pushViewController(detailView, animated: true)
+        
+        detailView.delegate = self
+    }
+    
+}
+
+extension ViewController: DetailViewControllerDelegate {
+    func changeText(_ text: String, indexPath: IndexPath) {
+        carModel[indexPath.section][indexPath.row].description = text
+        tableView.reloadRows(at: [indexPath], with: .left)
+    }
+    
+    
 }
