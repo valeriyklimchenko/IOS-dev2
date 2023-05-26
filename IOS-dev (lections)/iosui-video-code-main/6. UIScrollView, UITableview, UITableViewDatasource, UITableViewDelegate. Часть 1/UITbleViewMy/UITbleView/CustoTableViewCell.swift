@@ -64,16 +64,16 @@ final class CustoTableViewCell: UITableViewCell {
     
         [whiteView, imageCell, headerCell, descriptionCell].forEach { contentView.addSubview($0) }
         
-        let viewInset: CGFloat = 16
+        let viewInset: CGFloat = 0
         let imageInset: CGFloat = 8
         let labelInset: CGFloat = 16
         let heightView: CGFloat = 100
         NSLayoutConstraint.activate([
             
-            whiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: viewInset),
-            whiteView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: viewInset),
-            whiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -viewInset),
-            whiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -viewInset),
+            whiteView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            whiteView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            whiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            whiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             imageCell.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: imageInset),
             imageCell.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: imageInset),
