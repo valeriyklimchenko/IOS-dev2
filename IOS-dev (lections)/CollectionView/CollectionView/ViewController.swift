@@ -110,7 +110,7 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     private var inset: CGFloat { return 8 }
@@ -144,9 +144,9 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
                      right: inset)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        inset
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        inset
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Секция = \(indexPath.section), ячейка = \(indexPath.item)")

@@ -7,6 +7,11 @@
 
 import UIKit
 
+//Такой протокол может реализовать только класс (AnyObject)
+protocol DetailViewControllerDelegate: AnyObject {
+    func changeText(_ text: String, indexPath: IndexPath)
+}
+
 final class ViewController: UIViewController {
     
     private var carModel = CarModel.makeMockModel()
@@ -119,7 +124,7 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+//        print(indexPath)
         let detailView = DetailViewController()
         detailView.setupDetailVC(model: carModel[indexPath.section][indexPath.row], indexPath: indexPath)
 //        present(detailView, animated: true)

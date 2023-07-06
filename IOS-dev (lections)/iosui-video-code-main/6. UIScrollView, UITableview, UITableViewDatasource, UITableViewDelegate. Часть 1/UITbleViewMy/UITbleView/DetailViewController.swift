@@ -7,10 +7,10 @@
 
 import UIKit
 
-//Такой протокол может реализовать только класс (AnyObject)
-protocol DetailViewControllerDelegate: AnyObject {
-    func changeText(_ text: String, indexPath: IndexPath)
-}
+////Такой протокол может реализовать только класс (AnyObject)
+//protocol DetailViewControllerDelegate: AnyObject {
+//    func changeText(_ text: String, indexPath: IndexPath)
+//}
 
 final class DetailViewController: UIViewController {
     
@@ -56,6 +56,8 @@ final class DetailViewController: UIViewController {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.placeholder = "Ввкдите текст"
+        
+        //detailVC должен реализовать делегат textField
         text.delegate = self
         return text
     }()
@@ -89,7 +91,7 @@ final class DetailViewController: UIViewController {
     }
     
     //Увеличиваем высоту отступа scrollView снизу на высоту клавиатуры на данном устройстве
-    @objc func keyboardShow(notification: NSNotification) {
+    @objc private func keyboardShow(notification: NSNotification) {
         if let keySize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
             scrollView.contentInset.bottom = keySize.height
@@ -97,7 +99,7 @@ final class DetailViewController: UIViewController {
         }
     }
     
-    @objc func keyboarHide() {
+    @objc private func keyboarHide() {
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets.bottom = .zero
     }
@@ -119,9 +121,10 @@ final class DetailViewController: UIViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
                                     
+        //Чтобы scrollView работал, помещаем внутрь него view, растягиваем по ширине scrollView и указываем ширину вью, равную ширине скролл вью
         scrollView.addSubview(detailView)
         NSLayoutConstraint.activate([
             detailView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -159,11 +162,13 @@ final class DetailViewController: UIViewController {
     
 }
 
-//Скрытие клавиатуры при нажатии return
 extension DetailViewController: UITextFieldDelegate {
+    
+    //endEditing скрывает клавиатуру при нажатии return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         detailTextField.endEditing(true)
         descriptionLabel.text = textField.text
+        textField.text = ""
         delegate?.changeText(textField.text!, indexPath: indexPath)
         return true
     }
